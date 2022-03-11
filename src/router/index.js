@@ -1,22 +1,38 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import WeaponView from '../views/WeaponView.vue'
+import GoalsView from '../views/GoalsView.vue'
+import ArsenalView from '../views/ArsenalView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'weapon',
+    component: WeaponView,
+    meta: {
+      left: 'goal',
+      right: 'arsenal'
+    }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/goal',
+    name: 'goal',
+    component: GoalsView,
+    meta: {
+      left: 'arsenal',
+      right: 'weapon'
+    }
+  },
+  {
+    path: '/arsenal',
+    name: 'arsenal',
+    component: ArsenalView,
+    meta: {
+      left: 'weapon',
+      right: 'goal'
+    }
   }
 ]
 
@@ -24,6 +40,15 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  to.meta.transitionName = from.meta.right === to.name ? 'slide-right' : from.meta.left === to.name ? 'slide-left' : 'fade'
+  to.meta.nav = {
+    left: router.resolve({ name: to.meta.left }).route,
+    right: router.resolve({ name: to.meta.right }).route
+  }
+  next()
 })
 
 export default router
