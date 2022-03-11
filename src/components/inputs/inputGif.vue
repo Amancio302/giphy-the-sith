@@ -1,19 +1,22 @@
 <template>
   <div class="input-container gif-input-container">
-    <div class="row">
-      <sui-input
-        placeholder="Começe a digitar algo..."
-        icon="search"
-        size="big"
-        v-model="searchTerm"
-        class="input"
-        @blur="toggleDropdown(false)"
-        ref="gif-input"
-      />
+    <div class="row justify-center">
+      <div class="input">
+        <sui-input
+          placeholder="Começe a digitar algo..."
+          icon="search"
+          size="big"
+          v-model="searchTerm"
+          @focus="toggleFocus(true)"
+          @blur="toggleFocus(false)"
+          ref="gif-input"
+          fluid
+        />
+      </div>
     </div>
     <!-- Drops the gifs -->
-    <transition name="slide" @leave="onLeave">
-      <div ref="dropdown" class="dropdown" v-show="controllers.dropSelector">
+    <transition name="drop">
+      <div ref="dropdown" class="dropdown" v-show="showDropdown">
         <div class="gif-container">
             <div v-show="showGifs">
               <div class="row">
@@ -55,7 +58,9 @@ export default {
       selector: false,
       gifHeight: 200,
       dropSelector: false,
-      isLoading: false
+      isLoading: false,
+      isFocused: false,
+      firstValidTerm: false
     }
   }),
   props: {
@@ -85,16 +90,15 @@ export default {
       }
     },
     isSearchTermValid () {
-      return this.searchTerm && this.searchTerm.length >= this.minStringLen
+      const isValid = !!(this.searchTerm && this.searchTerm.length >= this.minStringLen)
+      if (!this.controllers.firstValidTerm && isValid) this.controllers.firstValidTerm = true
+      return isValid
     },
-    onLeave () {
-      this.render()
+    closeDropdown () {
+      this.inputRef.$el.blur()
     },
-    toggleDropdown (val) {
-      if (this.showGifs) {
-        this.controllers.selector = val
-        if (val) this.calculateDropdownWidth()
-      }
+    toggleFocus (val) {
+      this.controllers.isFocused = val
     },
     calculateDropdownWidth () {
       this.$refs.dropdown.style.width = `${this.inputRef.$el.clientWidth}px`
@@ -103,6 +107,7 @@ export default {
       e.preventDefault()
       this.$emit('input', gif)
       this.$emit('change', gif)
+      this.closeDropdown()
     }
   },
   watch: {
@@ -117,23 +122,25 @@ export default {
       handler: function (val) {
         if (val) {
           this.calculateDropdownWidth()
-          this.controllers.dropSelector = true
         }
       }
     }
   },
   computed: {
-    showGifs: function () {
-      return this.searchTerm !== null && this.isSearchTermValid()
-    },
     inputRef: function () {
       return this.$refs['gif-input']
-    }
+    },
+    showDropdown: function () {
+      return this.controllers.isFocused && this.controllers.firstValidTerm
+    },
+    showGifs: function () {
+      return this.isSearchTermValid()
+    },
   }
 }
 </script>
 
-<style>
+<style scoped>
   .gif-input-container {
     padding-bottom: 0;
     overflow: hidden;
@@ -146,18 +153,46 @@ export default {
   .gif-container img {
     cursor: pointer;
   }
-  .slide-enter-active, .slide-leave-active {
-    transition: 1s;
-  }
-  .slide-enter {
-    transform: translateY(100%, 0);
-  }
-  .slide-leave-to {
-    transform: translateY(-100%, 0);
-  }
   .loader {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
+  .drop-enter-active {
+    /* animation: growDown 1s; */
+    animation: rotateMenu 1s;
+    transform-origin: top center
+  }
+
+  .drop-leave-active {
+    /* animation: growDown 1s reverse; */
+    animation: rotateMenu 1s reverse;
+    transform-origin: top center
+  }
+
+  @keyframes growDown {
+    0% {
+      transform: scaleY(0)
+    }
+    80% {
+      transform: scaleY(1.1)
+    }
+    100% {
+      transform: scaleY(1)
+    }
+  }
+
+  @keyframes rotateMenu {
+    0% {
+      transform: rotateX(-90deg)
+    }
+    70% {
+      transform: rotateX(20deg)
+    }
+    100% {
+      transform: rotateX(0deg)
+    }
+  }
+
 </style>
