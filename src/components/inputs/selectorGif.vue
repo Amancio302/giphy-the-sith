@@ -12,9 +12,7 @@
     }">
       <transition name="scale-fade" @after-leave="onAfterLeave">
         <ContainerGif
-          :src="keepData.src"
-          :height="keepData.height"
-          :width="keepData.width"
+          :id="keepData.id"
           v-show="showGif"
         />
       </transition>
@@ -51,7 +49,6 @@ export default {
       this.$emit('input', val)
     },
     onAfterLeave () {
-      console.log('saiu')
       this.keepData = {}
     },
     setLoading (val) {
@@ -63,14 +60,12 @@ export default {
       return parseGif(this.value, 'fixed_height')
     },
     showGif: function () {
-      console.log(this.value, !!this.value)
       return !!this.value
     }
   },
   watch: {
     gif: {
       handler (val) {
-        console.log(val)
         if (val.id) this.keepData = val
       }
     }
