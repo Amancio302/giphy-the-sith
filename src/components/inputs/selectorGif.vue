@@ -7,12 +7,17 @@
         :height="controllers.gifHeight"
       />
     </div>
-    <div class="row justify-center gif">
-      <ContainerGif
-        :src="gif.src"
-        :height="`${controllers.gifHeight}px`"
-        :width="gif.width"
-      />
+    <div class="row justify-center gif" :style="{
+      height: `${controllers.gifHeight}px`
+    }">
+      <transition name="scale-fade" @after-leave="onAfterLeave">
+        <ContainerGif
+          :src="keepData.src"
+          :height="keepData.height"
+          :width="keepData.width"
+          v-show="showGif"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -38,11 +43,16 @@ export default {
     controllers: {
       isLoading: false,
       gifHeight: 200
-    }
+    },
+    keepData: {}
   }),
   methods: {
     onInput (val) {
       this.$emit('input', val)
+    },
+    onAfterLeave () {
+      console.log('saiu')
+      this.keepData = {}
     },
     setLoading (val) {
       this.controllers.isLoading = val
@@ -51,6 +61,18 @@ export default {
   computed: {
     gif: function () {
       return parseGif(this.value, 'fixed_height')
+    },
+    showGif: function () {
+      console.log(this.value, !!this.value)
+      return !!this.value
+    }
+  },
+  watch: {
+    gif: {
+      handler (val) {
+        console.log(val)
+        if (val.id) this.keepData = val
+      }
     }
   }
 }
