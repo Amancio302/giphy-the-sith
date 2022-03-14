@@ -4,11 +4,14 @@
       <InputGif
         :value="value"
         @input="onInput"
+        :height="controllers.gifHeight"
       />
     </div>
     <div class="row justify-center gif">
       <ContainerGif
-        :src="src"
+        :src="gif.src"
+        :height="`${controllers.gifHeight}px`"
+        :width="gif.width"
       />
     </div>
   </div>
@@ -19,6 +22,8 @@
 import InputGif from '@/components/inputs/inputGif.vue'
 
 import ContainerGif from '@/components/containers/containerGif.vue'
+
+import { parseGif } from '@/utils/gif'
 
 export default {
   name: 'gif-selector-component',
@@ -31,7 +36,8 @@ export default {
   },
   data: () => ({
     controllers: {
-      isLoading: false
+      isLoading: false,
+      gifHeight: 200
     }
   }),
   methods: {
@@ -42,15 +48,9 @@ export default {
       this.controllers.isLoading = val
     }
   },
-  watch: {
-    src: function () {
-      this.setLoading(true)
-    }
-  },
   computed: {
-    src: function () {
-      if (this.value == null) return ''
-      return this.value.images.fixed_height.url
+    gif: function () {
+      return parseGif(this.value, 'fixed_height')
     }
   }
 }
@@ -58,6 +58,6 @@ export default {
 
 <style scoped>
   .gif {
-    margin-top: 100px;
+    margin: 64px 0;
   }
 </style>
