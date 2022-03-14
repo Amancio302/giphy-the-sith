@@ -1,33 +1,15 @@
 <template>
-  <div class="row justify-center">
-    <div 
-      :style="{
-        height,
-        width,
-        background: `url(${src})`,
-      }"
-      @mouseenter="toggleImageHover"
-      @mouseleave="toggleImageHover"
-    >
-      <div class="row justify-end" v-if="favorited && controllers.isImageHovered">
-        <div class="col cols-auto">
-          <sui-icon
-            name="star"
-            size="big"
-            class="star-icon"
-            :color="favorited ? 'yellow' : 'white'"
-            :outline="controllers.isIconHovered"
-            @mouseenter="toggleIconHover"
-            @mouseleave="toggleIconHover"
-            @click="onClick"
-          />
-        </div>
-      </div>
-    </div>
+  <div id="container-gif">
+    <div ref="gif"/>
   </div>
 </template>
 
 <script>
+
+import { renderGif } from '@giphy/js-components'
+
+import { getOneGifById } from '@/services/giphy/gif'
+
 export default {
   name: 'gif-container-component',
   props: {
@@ -40,8 +22,8 @@ export default {
     width: {
       type: String
     },
-    favorited: {
-      type: Boolean
+    id: {
+      type: String
     }
   },
   data: () => ({
@@ -50,16 +32,42 @@ export default {
       isIconHovered: false
     }
   }),
-  methods: {
-    toggleImageHover () {
-      this.controllers.isImageHovered = !this.controllers.isImageHovered
-    },
-    toggleIconHover () {
-      this.controllers.isIconHovered = !this.controllers.isIconHovered
-    },
-    onClick (e) {
-      this.$emit('click', e)
+  watch: {
+    id: function () {
+      this.render()
     }
+  },
+  methods: {
+    async render () {
+      if (this.id) {
+        const gifElement = this.$refs.gif
+        const height = gifElement.parentElement.parentElement.clientHeight
+          console.log(height, {gifElement})
+        if (gifElement) {
+          const { data } = await getOneGifById(this.id)
+          console.log(data)
+          renderGif(
+            {
+              height: height,
+              gif: data,
+              noLink: true
+            },
+            gifElement
+          )
+        }
+      }
+    }
+  },
+  created () {
+    window.addEventListener("resize", () => {
+      this.render()
+    })
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.myEventHandler);
+  },
+  mounted () {
+    this.render()
   }
 }
 </script>
@@ -68,5 +76,8 @@ export default {
   .star-icon {
     cursor: pointer;
     margin: 8px;
+  }
+  .image {
+    background-color: white;
   }
 </style>
