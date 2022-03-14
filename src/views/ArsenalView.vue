@@ -1,8 +1,8 @@
 <template>
   <div class="row justify-center">
     <div class="col cols-8 gif-selection">
-      <SelectorGif
-        v-model="gif"
+      <GridGif
+        :gifs="gifs"
       />
       <h3 class="row justify-center selection-text">
         Send the arsenal?
@@ -13,22 +13,27 @@
 
 <script>
 
-import SelectorGif from '@/components/inputs/selectorGif.vue'
+import GridGif from '@/components/containers/gridGif.vue'
 
 export default {
   name: 'gif-selection-view',
   components: {
-    SelectorGif
+    GridGif
   },
   data: () => ({
     gif: null
-  })
+  }),
+  computed: {
+    gifs: function () {
+      return Array.from(this.$store.getters.gifs)
+    }
+  }
 }
 </script>
 
 <style scoped>
   .gif-selection {
-    margin-top: 25vh;
+    /* margin-top: 25vh; */
   }
   .selection-text {
     color: #FFE81F;

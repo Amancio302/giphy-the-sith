@@ -1,12 +1,32 @@
 <template>
   <div class="row justify-center">
     <div class="col cols-8 gif-selection">
-      <SelectorGif
-        v-model="gif"
-      />
-      <h3 class="row justify-center selection-text">
-        Can it make him laught?
-      </h3>
+      <div class="row">
+        <div class="col">
+          <SelectorGif
+            v-model="gif"
+          />
+        </div>
+      </div>
+      <div class="row" v-if="!!gif">
+        <div class="col">
+          <h3 class="text-center selection-text">
+            Can it make him laught?
+          </h3>
+        </div>
+      </div>
+      <div class="row justify-center" v-if="!!gif">
+        <div class="col cols-4">
+          <sui-button color="red">
+            Não
+          </sui-button>
+        </div>
+        <div class="col cols-4">
+          <sui-button color="green" @click="onSuccessClick">
+            Sim
+          </sui-button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -22,13 +42,18 @@ export default {
   },
   data: () => ({
     gif: null
-  })
+  }),
+  methods: {
+    onSuccessClick () {
+      this.$store.commit('addGif', this.gif)
+    }
+  }
 }
 </script>
 
 <style scoped>
   .gif-selection {
-    margin-top: 25vh;
+    /* margin-top: 25vh; */
   }
   .selection-text {
     color: #FFE81F;
