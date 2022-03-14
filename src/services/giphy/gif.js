@@ -7,3 +7,7 @@ export function getTrendingGifs (offset, limit = 10)  {
 export function getSearchGifs (term, options)  {
   return api.search(term, options)
 }
+
+export function getManyGifsById (gifs) {
+  return api.gifs(gifs)
+}
