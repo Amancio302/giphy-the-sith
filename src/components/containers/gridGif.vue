@@ -1,9 +1,7 @@
 <template>
-  <div id="grid-gif">
-    <div class="row justify-center teste">
-      <div class="col cols-12">
+  <div id="grid-gif" class="hoverable">
+    <div class="row justify-center grid">
         <div ref="grid-gif"/>
-      </div>
     </div>
   </div>
 </template>
@@ -46,7 +44,12 @@ export default {
             gifWidth: this.controllers.gifWidth,
             width: width,
             columns: amount,
-            fetchGifs
+            noLink: true,
+            fetchGifs,
+            onGifClick: (data) => {
+              this.$emit('click', data.id)
+            },
+            className: 'clickable'
           },
           grid
         )
@@ -87,13 +90,9 @@ export default {
     border-radius: 10px;
   }
 
-  .teste {
+  .grid {
     max-height: 60vh;
     overflow-y: auto;
-  }
-
-  #grid-gif:hover {
-    background: #ffffff25;
   }
 
 </style>
