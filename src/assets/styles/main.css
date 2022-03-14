@@ -1,0 +1,235 @@
+/* Fonts */
+
+@font-face {
+  font-family: StarJedi;
+  src: url('/src/assets/fonts/starjedi/Starjedi.ttf');
+}
+
+/* Config */
+
+i.icon {
+  display: inline;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+/* Layout */
+
+.fill-height {
+  height: 100%;
+}
+
+/* Margin helper classes */
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+/* Rows helper classes */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Justify helper classes */
+
+.justify-space-between {
+  justify-content: space-between;
+}
+.justify-space-around {
+  justify-content: space-around;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+
+/* Columns helper classes */
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: content;
+  height: fit-content;
+}
+
+.cols-auto {
+  flex-grow: 0;
+}
+
+.cols-12 {
+  flex-grow: 0;
+  flex-basis: 100%;
+}
+
+.cols-11 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*11);
+}
+
+.cols-10 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*10);
+}
+
+.cols-9 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*9);
+}
+
+.cols-8 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*8);
+}
+
+.cols-7 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*7);
+}
+
+.cols-6 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*6);
+}
+
+.cols-5 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*5);
+}
+
+.cols-4 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*4);
+}
+
+.cols-3 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*3);
+}
+
+.cols-2 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12*2);
+}
+
+.cols-1 {
+  flex-grow: 0;
+  flex-basis: calc(100%/12);
+}
+
+/* Text helper classes */
+
+.text-right {
+  text-align: end;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Position helper classes */
+
+.absolute {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+/* Mouse helper classes */
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Animations helper classes */
+
+.slide-right-enter-active {
+  animation: slideRight 1s;
+}
+
+.slide-right-leave-active {
+  animation: slideLeft 1s;
+}
+
+.slide-left-enter-active {
+  animation: slideLeft 1s reverse;
+}
+
+.slide-left-leave-active {
+  animation: slideRight 1s reverse;
+}
+
+.drop-enter-active {
+  /* animation: growDown 1s; */
+  animation: rotateMenu 1s;
+  transform-origin: top center
+}
+
+.drop-leave-active {
+  /* animation: growDown 1s reverse; */
+  animation: rotateMenu 1s reverse;
+  transform-origin: top center
+}
+
+/* Animations Keyframes */
+
+@keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0)
+  }
+  80% {
+    transform: scaleY(1.1)
+  }
+  100% {
+    transform: scaleY(1)
+  }
+}
+
+@keyframes rotateMenu {
+  0% {
+    transform: rotateX(-90deg)
+  }
+  70% {
+    transform: rotateX(20deg)
+  }
+  100% {
+    transform: rotateX(0deg)
+  }
+}
+
