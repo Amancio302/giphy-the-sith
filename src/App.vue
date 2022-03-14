@@ -1,11 +1,20 @@
 <template>
   <div id="app">
+    <div class="absolute">
+      <div class="row justify-center">
+        <div class="col cols-auto">
+          <h2 class="logo mt-4">
+            Giphy the Sith
+          </h2>
+        </div>
+      </div>
+    </div>
     <div class="universe"/>
     <div class="stars"/>
     <div class="twinkling"/>
     <transition :name="transitionName" @beforeEnter="toggleNav(true)" @afterLeave="toggleNav(false)">
       <div class="absolute" :key="$route.name">
-        <div class="row justify-space-between">
+        <div class="row justify-space-between fill-height">
           <div class="col cols-1">
             <router-link :to="left.fullPath" v-if="!controllers.onTransition">
               {{ left.name }}
@@ -22,12 +31,19 @@
         </div>
       </div>
     </transition>
+    <Menu/>
   </div>
 </template>
 
 <script>
+
+import Menu from '@/components/layout/Menu.vue'
+ 
 export default {
   name: 'app',
+  components: {
+    Menu
+  },
   computed: {
     route: function () {
       return this.$route
@@ -49,28 +65,30 @@ export default {
   }),
   methods: {
     toggleNav (val) {
-      console.log('toggle nav', val)
       this.controllers.onTransition = val
     }
   }
 }
 </script>
 
-<style lang="less">
-
-  @font-face {
-    font-family: StarJedi;
-    src: url('/src/assets/fonts/starjedi/Starjedi.ttf');
-  }
+<style>
 
   #app {
     height: 100%;
+  }
+  .logo {
+    color: #FFE81F;
+    font-family: StarJedi;
+    font-size: 3em;
+    z-index: 10;
+    margin: 0;
   }
   .universe {
     position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
+    max-height: 100vh;
     width: 100vw;
     background: linear-gradient(to bottom, #000000 80%, #0f0f0f 90%, #2E67F8 100%);
   }
@@ -91,41 +109,11 @@ export default {
     background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
     animation:move-twink-back 500s linear infinite;
   }
-  i.icon {
-    display: inline;
+  .config {
+    margin: 32px;
   }
-  .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .justify-space-between {
-    justify-content: space-between;
-  }
-  .justify-center {
-    justify-content: center;
-  }
-  .col {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    flex-basis: content;
-  }
-  .cols-auto {
-    flex-grow: 0;
-  }
-  .cols-8 {
-    flex-grow: 0;
-    flex-basis: calc(100vw/12*8);
-  }
-  .cols-1 {
-    flex-grow: 0;
-    flex-basis: calc(100vw/12*1);
-  }
-  .text-right {
-    text-align: end;
+  .icon {
+    z-index: 1;
   }
   .input-container {
     width: 100%;
@@ -139,20 +127,6 @@ export default {
     border-radius: 0 0 32px 32px;
     min-height: 77px;
   }
-  .absolute {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
-  .red {
-    background-color: red;
-  }
-  .green {
-    background-color: green;
-  }
-  .blue {
-    background-color: blue;
-  }
   .dropdown {
     position: absolute;
     background-color: #f9f9f9;
@@ -162,46 +136,4 @@ export default {
     overflow-y: hidden;
     width: 100%;
   }
-
-  @keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
-  }
-
-  @keyframes slideLeft {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  @keyframes slideRight {
-    from {
-      transform: translateX(100vw);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  .slide-right-enter-active {
-    animation: slideLeft 1s;
-  }
-
-  .slide-right-leave-active {
-    animation: slideRight 1s;
-  }
-
-  .slide-left-enter-active {
-    animation: slideLeft 1s reverse;
-  }
-
-  .slide-left-leave-active {
-    animation: slideRight 1s reverse;
-  }
-
-
-
 </style>
