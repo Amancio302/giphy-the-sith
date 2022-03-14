@@ -56,7 +56,6 @@ export default {
     minStringLen: 5,
     controllers: {
       selector: false,
-      gifHeight: 200,
       dropSelector: false,
       isLoading: false,
       isFocused: false,
@@ -84,7 +83,7 @@ export default {
         if (target) {
           this.controllers.isLoading = true
           const fetchGifs = async (offset) => await getSearchGifs(this.searchTerm, { lang: 'pt', offset, limit: 10 })
-          this.carousel = await renderCarousel({ gifHeight: this.controllers.gifHeight, fetchGifs, key: this.searchTerm, onGifClick: this.onGifClick, noLink: true }, target)
+          this.carousel = await renderCarousel({ gifHeight: this.gifHeight, fetchGifs, key: this.searchTerm, onGifClick: this.onGifClick, noLink: true }, target)
           this.controllers.isLoading = false
         }
       }
@@ -157,42 +156,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .drop-enter-active {
-    /* animation: growDown 1s; */
-    animation: rotateMenu 1s;
-    transform-origin: top center
-  }
-
-  .drop-leave-active {
-    /* animation: growDown 1s reverse; */
-    animation: rotateMenu 1s reverse;
-    transform-origin: top center
-  }
-
-  @keyframes growDown {
-    0% {
-      transform: scaleY(0)
-    }
-    80% {
-      transform: scaleY(1.1)
-    }
-    100% {
-      transform: scaleY(1)
-    }
-  }
-
-  @keyframes rotateMenu {
-    0% {
-      transform: rotateX(-90deg)
-    }
-    70% {
-      transform: rotateX(20deg)
-    }
-    100% {
-      transform: rotateX(0deg)
-    }
   }
 
 </style>
