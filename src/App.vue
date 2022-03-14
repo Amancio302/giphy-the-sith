@@ -3,7 +3,7 @@
     <div class="absolute">
       <div class="row justify-center">
         <div class="col cols-auto">
-          <h2 class="logo mt-4">
+          <h2 class="logo mt-4 star-text">
             Giphy the Sith
           </h2>
         </div>
@@ -15,34 +15,34 @@
     <transition :name="transitionName" @beforeEnter="toggleNav(true)" @afterLeave="toggleNav(false)">
       <div class="absolute" :key="$route.name">
         <div class="row justify-space-between fill-height">
-          <div class="col cols-1">
-            <router-link :to="left.fullPath" v-if="!controllers.onTransition">
-              {{ left.name }}
+          <div class="col cols-1 navigator hoverable star-text clickable">
+            <router-link class="fill-height row justify-center align-center" :to="left.fullPath" v-if="!controllers.onTransition">
+              <div> {{ left.name }} </div>
             </router-link>
           </div>
-          <div class="col">
+          <div class="col cols-8">
             <router-view/>
           </div>
-          <div class="col cols-1 text-right">
-            <router-link :to="right.fullPath" v-if="!controllers.onTransition">
-              {{ right.name }}
+          <div class="col cols-1 navigator hoverable star-text clickable">
+            <router-link class="fill-height row justify-center align-center" :to="right.fullPath" v-if="!controllers.onTransition">
+              <div> {{ right.name }} </div>
             </router-link>
           </div>
         </div>
       </div>
     </transition>
-    <Menu/>
+    <Toast/>
   </div>
 </template>
 
 <script>
 
-import Menu from '@/components/layout/Menu.vue'
+import Toast from '@/components/UI/Toast.vue'
  
 export default {
   name: 'app',
   components: {
-    Menu
+    Toast
   },
   computed: {
     route: function () {
@@ -77,8 +77,6 @@ export default {
     height: 100%;
   }
   .logo {
-    color: #FFE81F;
-    font-family: StarJedi;
     font-size: 3em;
     z-index: 10;
     margin: 0;
@@ -135,5 +133,15 @@ export default {
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
+  }
+  .navigator {
+    height: 100% !important;
+    text-decoration: none !important;
+    color: #ffffff !important;
+  }
+
+  a:-webkit-any-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
   }
 </style>
