@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    gifs: []
+    gifs: [],
+    lastGif: undefined
   },
   getters: {
     gifs (state) {
@@ -13,10 +14,15 @@ export default new Vuex.Store({
       if (state.gifs.length === 0) res = JSON.parse(localStorage.getItem('gifs'))
       else res = state.gifs
       return res || []
+    },
+    lastGif (state) {
+      return state.lastGif
     }
   },
   mutations: {
-    addGif (state, payload) {
+  },
+  actions: {
+    addGif ({ state }, payload) {
       const gifs = Array.from(JSON.parse(localStorage.getItem('gifs')) || [])
       if (gifs.filter(el => el.id === payload.id).length === 0) {
         gifs.push(payload)
@@ -26,10 +32,11 @@ export default new Vuex.Store({
         } else {
           state.gifs.push(payload)
         }
+        state.lastGif = payload
+        return true
       }
+      return false
     }
-  },
-  actions: {
   },
   modules: {
   }
