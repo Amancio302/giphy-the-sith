@@ -1,5 +1,10 @@
 /* Fonts */
 
+.star-text {
+  color: #FFE81F;
+  font-family: StarJedi;
+}
+
 @font-face {
   font-family: StarJedi;
   src: url('/src/assets/fonts/starjedi/Starjedi.ttf');
@@ -25,10 +30,31 @@ h3 {
   height: 100%;
 }
 
+.overlay {
+  z-index: 99;
+  position: absolute;
+}
+
+.hoverable:hover {
+  background: #ffffff25;
+}
+
+.card {
+  background-color: #050505;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px #fafafa solid;
+}
+
 /* Margin helper classes */
 
 .mt-4 {
-  margin-top: 16px;
+  margin-top: 16px !important;
+}
+
+.my-2 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
 }
 
 /* Rows helper classes */
@@ -56,18 +82,28 @@ h3 {
   justify-content: flex-end;
 }
 
+/* Align helper classes */
+
+.align-center {
+  align-items: center;
+}
+
+.align-bottom {
+  align-items: flex-end;
+}
+
 /* Columns helper classes */
 
 .col {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  flex-basis: content;
   height: fit-content;
 }
 
 .cols-auto {
   flex-grow: 0;
+  flex-basis: content;
 }
 
 .cols-12 {
@@ -172,6 +208,16 @@ h3 {
   animation: slideRight 1s reverse;
 }
 
+.slide-up-enter-active {
+  animation: scaleY 1s, fade 1s, slideUp 1s;
+  transform-origin: bottom;
+}
+
+.slide-up-leave-active {
+  animation: fade 1s reverse, slideUp 1s reverse;
+  transform-origin: bottom;
+}
+
 .drop-enter-active {
   /* animation: growDown 1s; */
   animation: rotateMenu 1s;
@@ -185,11 +231,11 @@ h3 {
 }
 
 .scale-fade-enter-active {
-  animation: scaleFade 1s;
+  animation: fade 1s, scale 1s;
 }
 
 .scale-fade-leave-active {
-  animation: scaleFade 1s reverse;
+  animation: fade 1s reverse, scale 1s reverse;
 }
 
 /* Animations Keyframes */
@@ -217,6 +263,15 @@ h3 {
   }
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes growDown {
   0% {
     transform: scaleY(0)
@@ -241,7 +296,7 @@ h3 {
   }
 }
 
-@keyframes scaleFade {
+@keyframes scale {
   from {
     opacity: 0;
     transform: scale(0);
@@ -249,6 +304,24 @@ h3 {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes scaleY {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
