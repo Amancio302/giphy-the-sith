@@ -1,17 +1,16 @@
 <template>
   <div class="input-container gif-input-container">
     <div class="row justify-center">
-      <div class="input">
-        <sui-input
+      <div class="ui big icon input fluid">
+        <input
           placeholder="Começe a digitar algo..."
-          icon="search"
-          size="big"
           v-model="searchTerm"
           @focus="toggleFocus(true)"
           @blur="toggleFocus(false)"
           ref="gif-input"
-          fluid
+          @keypress.enter="this.$emit('submit')"
         />
+        <i class="search icon"/>
       </div>
     </div>
     <!-- Drops the gifs -->
@@ -22,12 +21,6 @@
               <div class="row">
                 <div ref="gif-carousel-selector" class="gif-carousel-selector"/>
               </div>
-              <sui-loader/>
-            </div>
-            <div v-show="!showGifs && controllers.isLoading" class="loader" :style="{
-              height: `${controllers.gifHeight}px`
-            }">
-              <sui-loader active centered inline />
             </div>
             <div v-show="!showGifs && !controllers.isLoading" class="loader">
               <div class="nothing-yet">
@@ -38,9 +31,6 @@
       </div>
     </transition>
   </div>
-  <!-- <div class="col col-auto">
-      <sui-image class="giphy-logo" src="https://raw.githubusercontent.com/Zozman/TheGifOracleChrome/master/screenshots/giphyLogo.gif"/>
-    </div> -->
 </template>
 
 <script>
@@ -94,13 +84,13 @@ export default {
       return isValid
     },
     closeDropdown () {
-      this.inputRef.$el.blur()
+      this.inputRef.blur()
     },
     toggleFocus (val) {
       this.controllers.isFocused = val
     },
     calculateDropdownWidth () {
-      this.$refs.dropdown.style.width = `${this.inputRef.$el.clientWidth}px`
+      this.$refs.dropdown.style.width = `${this.inputRef.clientWidth}px`
     },
     onGifClick (gif, e) {
       e.preventDefault()
@@ -143,11 +133,7 @@ export default {
   .gif-input-container {
     padding-bottom: 0;
     overflow: hidden;
-  }
-  .giphy-logo {
-    display: flex;
-    flex-direction: column;
-    height: 45px;
+    width: 100%;
   }
   .gif-container img {
     cursor: pointer;

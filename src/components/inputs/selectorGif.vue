@@ -1,21 +1,27 @@
 <template>
   <div id="gif-selector">
-    <div class="row justify-center">
-      <InputGif
-        :value="value"
-        @input="onInput"
-        :height="controllers.gifHeight"
-      />
-    </div>
-    <div class="row justify-center gif" :style="{
-      height: `${controllers.gifHeight}px`
-    }">
-      <transition name="scale-fade" @after-leave="onAfterLeave">
-        <ContainerGif
-          :id="keepData.id"
-          v-show="showGif"
+    <div class="ui two column centered  grid">
+      <div class="row">
+        <InputGif
+          :value="value"
+          @input="onInput"
+          @submit="$emit('submit')"
+          :height="controllers.gifHeight"
         />
-      </transition>
+      </div>
+      <div class="row" :style="{
+        height: `${controllers.gifHeight}px`
+      }">
+        <div class="column" style="flex: 0">
+          <transition name="scale-fade" @after-leave="onAfterLeave">
+            <ContainerGif
+              :id="keepData.id"
+              :height="controllers.gifHeight"
+              v-show="showGif"
+            />
+          </transition>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +41,10 @@ export default {
     ContainerGif
   },
   props: {
-    value: {}
+    value: {},
+    editable: {
+      type: Boolean
+    }
   },
   data: () => ({
     controllers: {
@@ -46,7 +55,7 @@ export default {
   }),
   methods: {
     onInput (val) {
-      this.$emit('input', val)
+      this.$emit('input', parseGif(val))
     },
     onAfterLeave () {
       this.keepData = {}
