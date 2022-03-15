@@ -1,5 +1,5 @@
 <template>
-  <div id="toast" class="overlay toast">
+  <div id="toast" class="overlay my-toast">
     <transition name="fade">
       <div class="star-text justify-center" v-show="showToast">
         <transition-group name="slide-up" @leave="onLeave">
@@ -9,6 +9,7 @@
           >
             <ContainerGif
               v-bind="parse(gif)"
+              :height="75"
               class="toast-gif"
             />
           </div>
@@ -23,8 +24,6 @@
 
 import ContainerGif from '@/components/containers/containerGif.vue'
 
-import { parseGif } from '@/utils/gif'
-
 export default {
   name: 'GTS-toast',
   components: {
@@ -35,33 +34,28 @@ export default {
   }),
   methods: {
     onLeave () {
-      console.log('aqui')
       this.queue.splice(0, 1)
     },
     parse (gif) {
       const index = this.queue.map(el => el.id).indexOf(gif.id)
-      console.log(index)
       return this.queue[index]
     }
   },
   watch: {
     lastGif: function (val) {
-      console.log(val)
       if (val) {
         this.queue.push({ ...val, active: true })
         setTimeout(() => {
           this.queue[0].active = false
-          console.log(val.id, this.queue[0].id)
         }, 5000)
       }
     },
   },
   computed: {
     lastGif: function () {
-      return parseGif(this.$store.getters.lastGif, 'fixed_width_small')
+      return this.$store.getters.lastGif
     },
     reversedQueue: function () {
-      console.log('re-reversing')
       return Array.from(this.queue.filter(el => el.active)).reverse()
     },
     showToast: function () {
@@ -72,11 +66,12 @@ export default {
 </script>
 
 <style scoped>
-  .toast {
+  .my-toast {
     margin: 16px;
     bottom: 0;
     right: 0;
     overflow: hidden;
+    z-index: 99;
   }
   .toast-gif {
     margin-top: 8px;
