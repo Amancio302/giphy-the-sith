@@ -1,48 +1,55 @@
 <template>
   <div id="app">
-    <div class="absolute">
-      <div class="row justify-center">
-        <div class="col cols-auto">
-          <h2 class="logo mt-4 star-text">
-            Giphy the Sith
-          </h2>
-        </div>
-      </div>
-    </div>
     <div class="universe"/>
     <div class="stars"/>
     <div class="twinkling"/>
-    <transition :name="transitionName" @beforeEnter="toggleNav(true)" @afterLeave="toggleNav(false)">
-      <div class="absolute" :key="$route.name">
-        <div class="row justify-space-between fill-height">
-          <div class="col cols-1 navigator hoverable star-text clickable">
-            <router-link class="fill-height row justify-center align-center" :to="left.fullPath" v-if="!controllers.onTransition">
-              <div> {{ left.name }} </div>
-            </router-link>
+    <div class="ui grid main">
+      <router-link class="two wide column stretch hoverable navigator star-text text-center" :to="left.fullPath">
+        <div class="nav-text">
+          {{ left.name }}
+        </div>
+      </router-link>
+      <div class="twelve wide column">
+        <div class="ui grid container">
+          <div class="row logo">
+            <div class="column">
+              <h2 class="logo mt-4 star-text text-center">
+                Giphy the Sith
+              </h2>
+            </div>
           </div>
-          <div class="col cols-8">
-            <router-view/>
-          </div>
-          <div class="col cols-1 navigator hoverable star-text clickable">
-            <router-link class="fill-height row justify-center align-center" :to="right.fullPath" v-if="!controllers.onTransition">
-              <div> {{ right.name }} </div>
-            </router-link>
+          <div class="row ">
+            <div class="column">
+              <transition :name="transitionName" @beforeEnter="toggleNav(true)" @afterLeave="toggleNav(false)">
+                <div :key="$route.name">
+                  <router-view/>
+                </div>
+              </transition>
+            </div>
           </div>
         </div>
       </div>
-    </transition>
+      <router-link class="two wide column stretch hoverable navigator star-text text-center" :to="right.fullPath">
+        <div class="nav-text">
+          {{ right.name }}
+        </div>
+      </router-link>
+    </div>
     <Toast/>
+    <Alert/>
   </div>
 </template>
 
 <script>
 
 import Toast from '@/components/UI/Toast.vue'
+import Alert from '@/components/UI/Alert.vue'
  
 export default {
   name: 'app',
   components: {
-    Toast
+    Toast,
+    Alert
   },
   computed: {
     route: function () {
@@ -74,12 +81,12 @@ export default {
 <style>
 
   #app {
-    height: 100%;
+    height: 100vh;
+    background: blue;
   }
   .logo {
-    font-size: 3em;
-    z-index: 10;
-    margin: 0;
+    font-size: 2em;
+    height: fit-content;
   }
   .universe {
     position: absolute;
@@ -102,10 +109,28 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 80vh;
+    height: 80%;
     width: 100vw;
     background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
     animation:move-twink-back 500s linear infinite;
+  }
+  .header {
+    height: 10vh
+  }
+  .main {
+    /* max-height: 100vh; */
+    position: relative;
+    overflow: auto;
+  }
+  .content {
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  .nav-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
   .config {
     margin: 32px;
@@ -113,31 +138,15 @@ export default {
   .icon {
     z-index: 1;
   }
-  .input-container {
-    width: 100%;
-    min-height: 45px;
-  }
-  .input {
-    height: 45px;
-    width: 100%;
-  }
   .input-container-rounded {
     border-radius: 0 0 32px 32px;
     min-height: 77px;
   }
-  .dropdown {
-    position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
-  }
   .navigator {
-    height: 100% !important;
+    min-height: 100vh !important;
     text-decoration: none !important;
     color: #ffffff !important;
+    z-index: 3;
   }
 
   a:-webkit-any-link {
