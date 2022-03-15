@@ -1,47 +1,61 @@
 <template>
   <div id="weapon-view">
-    <div class="row">
-      <div class="col">
-        <SelectorGif
-          v-model="gif"
-        />
+    <div class="ui grid">
+      <div class="row">
+        <div class="column stretch">
+          <SelectorGif
+            v-model="gif"
+            @submit="onSuccessClick"
+          />
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
+    <div class="ui grid" v-if="!!gif">
+      <div class="two column centered row">
+        <div class="7 wide column">
+          <InputText
+            label="título"
+            v-model="gif.title"
+          />
+        </div>
+        <div class="7 wide column">
+          <InputText
+            label="url"
+            v-model="gif.url"
+          />
+        </div>
+      </div>
+      <div class="row centered">
         <h3 class="text-center star-text my-2">
-          Adicionar ao arsenal?
+          guardar no arsenal?
         </h3>
       </div>
+      <div class="row centered">
+        <div class="ten wide column">
+          <div class="two ui buttons">
+            <button class="ui red button fluid" :class="{'disabled': !gif}" @click="onErrorClick">
+              Não
+            </button>
+            <button class="ui green button fluid" :class="{'disabled': !gif}" @click="onSuccessClick">
+              Sim
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row justify-center">
-      <div class="col cols-4">
-        <sui-button :disabled="!gif" color="red" @click="onErrorClick">
-          Não
-        </sui-button>
-      </div>
-      <div class="col cols-4">
-        <sui-button :disabled="!gif" color="green" @click="onSuccessClick">
-          Sim
-        </sui-button>
-      </div>
-    </div>
-    <transition name="scale-fade">
-      <div v-show="controllers.showOverlay" class="overlay star-text already-added">
-        Esse gif já adicionado ao arsenal patrulheiro!
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
 
 import SelectorGif from '@/components/inputs/selectorGif.vue'
+import InputText from '@/components/inputs/InputText.vue'
 
 export default {
   name: 'gif-selection-view',
   components: {
-    SelectorGif
+    SelectorGif,
+    InputText
   },
   data: () => ({
     gif: null,
@@ -53,11 +67,8 @@ export default {
     async onSuccessClick () {
       const res = await this.$store.dispatch('addGif', this.gif)
       console.log(res)
-      if (!res) {
-        this.controllers.showOverlay = true
-        setTimeout(() => {
-          this.controllers.showOverlay = false
-        }, 3000)
+      if (res !== true) {
+        this.$store.commit('sendMessage', { text: 'esse gif já está no arsenal patrulheiro!', duration: 2500 })
       }
     },
     onErrorClick () {
@@ -68,8 +79,7 @@ export default {
 </script>
 
 <style scoped>
-  .already-added {
-    bottom: 0;
-    margin-bottom: 16px;
+  #weapon-view {
+    height: 100%;
   }
 </style>

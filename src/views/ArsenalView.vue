@@ -1,153 +1,51 @@
 <template>
-  <!-- Full Arsenal -->
   <div id="arsenal-view">
-    <!-- Grid Row -->
-    <div class="row">
-      <div class="col">
-        <GridGif
-          :gifs="gifs"
-          @click="onGifClick"
-        />
+    <div class="ui grid" v-if="gifs.length > 0">
+      <div class="centered row">
+        <div class="column">
+          <GridGif
+            :gifs="gifs"
+            @click="onGifClick"
+          />
+        </div>
       </div>
-    </div>
-    <!-- Text Row -->
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center star-text my-2">
-          o que deseja fazer com o arsenal?
-        </h3>
+      <div class="centered row">
+        <div class="column">
+          <h3 class="text-center star-text my-2">
+            o que deseja fazer com o arsenal?
+          </h3>
+        </div>
       </div>
-    </div>
-    <!-- Actions Row -->
-    <div class="row justify-center">
-      <div class="col cols-4">
-        <sui-button :disabled="gifs.length <= 0" color="red" @click="onErrorClick">
-          Limpar
-        </sui-button>
-      </div>
-      <div class="col cols-4">
-        <sui-button :disabled="gifs.length <= 0" color="green" @click="onSuccessClick">
-          Enviar
-        </sui-button>
-      </div>
-    </div>
-    <!-- Modal -->
-    <transition name="fade">
-      <div class="overlay arsenal-overlay" v-if="controllers.showOverlay">
-        <div class="row fill-height justify-center align-center">
-          <div class="col cols-auto">
-            <!-- Card -->
-            <div class="card overlay-card">
-              <!-- Text -->
-              <div class="row text-center alignt-center">
-                <div class="col cols-1">
-                </div>
-                <div class="col">
-                  <h3 class="star-text my-2">
-                    o que deseja fazer com o gif?
-                  </h3>
-                </div>
-                <!-- Close Icon -->
-                <div class="col cols-1">
-                  <sui-icon
-                    name="close icon"
-                    inverted
-                    color="yellow"
-                    size="big"
-                    class="clickable"
-                    @click="onCloseClick"
-                  />
-                </div>
-              </div>
-              <!-- Actions btns -->
-              <div class="row justify-space-around align-center">
-                <div class="col cols-4">
-                  <sui-button
-                    icon="trash alternate"
-                    content="Deletar"
-                    color="red"
-                    @click="onModalClick('delete')"
-                  />
-                </div>
-                <div class="col cols-4">
-                  <sui-button
-                    icon="pencil alternate"
-                    content="Editar"
-                    color="yellow"
-                    @click="onModalClick('update')"
-                  />
-                </div>
-              </div>
-              <!-- Actions Text -->
-              <div class="row justify-center star-text actions actions-text my-2">
-                <transition name="fade">
-                  <!-- Delete actions -->
-                  <div class="row justify-space-around" v-if="controllers.action === 'delete'">
-                    <div class="col cols-12 text-center my-2">
-                      Tem certeza disso patrulheiro? Não há como voltar atrás
-                    </div>
-                    <div class="col cols-4">
-                      <sui-button
-                        icon="step backward"
-                        content="Repensar"
-                        color="red"
-                        basic
-                        @click="onModalClick('delete')"
-                      />
-                    </div>
-                    <div class="col cols-4">
-                      <sui-button
-                        icon="trash alternate"
-                        content="Deletar"
-                        color="red"
-                        @click="onModalClick('delete')"
-                      />
-                    </div>
-                  </div>
-                  <!-- Update Actions -->
-                  <div class="row justify-space-around" v-if="controllers.action === 'update'">
-                    <div class="col cols-12 text-center my-2">
-                      Edite os campos que quiser patrulheiro
-                    </div>
-                    <div class="col cols-5">
-                      <sui-input
-                        icon="step backward"
-                        content="Repensar"
-                        color="red"
-                        basic
-                      />
-                    </div>
-                    <div class="col cols-5">
-                      <sui-input
-                        icon="trash alternate"
-                        content="Deletar"
-                        color="red"
-                      />
-                    </div>
-                    <div class="col cols-4 mt-4">
-                      <sui-button
-                        icon="step backward"
-                        content="Repensar"
-                        color="red"
-                        basic
-                        @click="onModalClick('delete')"
-                      />
-                    </div>
-                    <div class="col cols-4 mt-4">
-                      <sui-button
-                        icon="paper plane"
-                        content="Salvar"
-                        color="yellow"
-                        @click="onModalClick('delete')"
-                      />
-                    </div>
-                  </div>
-                </transition>
-              </div>
-            </div>
+      <div class="centered row">
+        <div class="ten wide column">
+          <div class="two ui buttons">
+            <button class="ui button red" :class="{'disabled': gifs.length < 1}" @click="onErrorClick">
+              Limpar
+            </button>
+            <button class="ui button green" :class="{'disabled': gifs.length < 1}" @click="onSuccessClick">
+              Atacar
+            </button>
           </div>
         </div>
       </div>
+    </div>
+    <div class="ui grid" v-else>
+      <div class="centered row">
+        <div class="10 wide column">
+          <div class="star-text text-center">
+            nada ainda patrulheiro!
+          </div>
+        </div>
+      </div>
+    </div>
+    <transition name="scale">
+      <UpdateGif
+        :show="controllers.showOverlay"
+        :data="controllers.clickedGif"
+        @close="onCloseClick"
+        @delete="onDeleteClick"
+        @submit="onSubmitClick"
+      />
     </transition>
   </div>
 </template>
@@ -156,16 +54,20 @@
 
 import GridGif from '@/components/containers/gridGif.vue'
 
+import UpdateGif from '@/components/modals/UpdateGifModal.vue'
+
 export default {
   name: 'gif-selection-view',
   components: {
-    GridGif
+    GridGif,
+    UpdateGif
   },
   data: () => ({
     controllers: {
       showOverlay: false,
       clickedId: undefined,
-      action: undefined
+      clickedGif: undefined,
+      action: undefined,
     }
   }),
   computed: {
@@ -174,43 +76,46 @@ export default {
     }
   },
   methods: {
-    onErrorClick () {
-      // Clear all arsenal
+    async onErrorClick () {
+      await this.$store.dispatch('clearGifs')
+      this.$store.commit('sendMessage', { text: 'arsenal completamente limpo patrulheiro!', duration: 2500 })
     },
-    onSuccessClick () {
-      // Submit all arsenal
+    async onSuccessClick () {
+      await this.$store.dispatch('sendGifs')
+      this.$store.commit('sendMessage', { text: 'ataque enviado com sucesso patrulheiro!', duration: 3000 })
     },
     onGifClick (id) {
-      console.log(id)
       this.controllers.clickedId = id
+      this.controllers.clickedGif = this.gifs.filter(el => el.id === id)[0]
       this.controllers.showOverlay = true
-    },
-    onModalClick (action) {
-      this.controllers.action = action
     },
     onCloseClick () {
       this.controllers.clickedId = undefined
+      this.controllers.clickedGif = undefined
       this.controllers.showOverlay = false
+    },
+    async onDeleteClick () {
+      const res = await this.$store.dispatch('deleteGif', this.controllers.clickedId)
+      if (res) {
+        // GIF DELETED
+      } else {
+        // DELETE ERROR
+      }
+      this.onCloseClick()
+    },
+    async onSubmitClick (val) {
+      const res = await this.$store.dispatch('updateGif', val)
+      if (res) {
+        // GIFS SUBMITED
+      } else {
+        // SUBMIT ERROR
+      }
+      this.onCloseClick()
     }
   }
 }
 </script>
 
 <style scoped>
-  .arsenal-overlay {
-    background-color: #00000050;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-  .overlay-card {
-      min-width: 25vw;
-    }
-  .actions-text {
-    font-size: 1.25em;
-    line-height: 1.5em;
-    color: white;
-    margin-top: 16px;
-  }
+  
 </style>
