@@ -17,7 +17,7 @@ export default {
       type: String
     },
     height: {
-      type: String
+      type: [String, Number]
     },
     width: {
       type: String
@@ -41,11 +41,9 @@ export default {
     async render () {
       if (this.id) {
         const gifElement = this.$refs.gif
-        const height = gifElement.parentElement.parentElement.clientHeight
-          console.log(height, {gifElement})
+        const height = isNaN(this.height) ? parseInt(this.height.match(/(\d+)/)) : this.height
         if (gifElement) {
           const { data } = await getOneGifById(this.id)
-          console.log(data)
           renderGif(
             {
               height: height,
