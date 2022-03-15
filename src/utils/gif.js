@@ -1,12 +1,12 @@
-export function parseGif (gifImage, selector = 'original') {
+export function parseGif (gifImage) {
   let gif
-  if (!gifImage || !gifImage.images || !gifImage.images[selector]) gif = {}
-  else gif = gifImage.images[selector]
+  if (!gifImage) gif = {}
+  else gif = gifImage
   const res = {
-    id: gifImage ? gifImage.id : undefined,
-    src: gif.url || '',
-    height: `${gif.height}px` || '',
-    width: `${gif.width}px` || ''
+    id: gif.id || '',
+    url: gif.url || '',
+    type: gif.type,
+    title: gif.title
   }
   return res
 }
