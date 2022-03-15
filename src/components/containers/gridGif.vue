@@ -1,8 +1,6 @@
 <template>
-  <div id="grid-gif" class="hoverable">
-    <div class="row justify-center grid">
-        <div ref="grid-gif"/>
-    </div>
+  <div id="grid-gif" class="row justify-center hoverable">
+    <div ref="grid-gif" class="grid"/>
   </div>
 </template>
 
@@ -21,43 +19,41 @@ export default {
     }
   },
   data: () => ({
-    removed: [],
     controllers: {
-      offsetGrid: 0,
       gridCount: 4,
-      gifWidth: 400
+      gifWidth: 400,
+      renders: 0
     }
   }),
   methods: {
-    onClick (i) {
-      // remove icon
-      this.removed.push(this.gifs[i].id)
-    },
     async render () {
       const grid = this.$refs['grid-gif']
       if (grid) {
-        const width = grid.parentElement.clientWidth
-        const amount = Math.round(width / this.controllers.gifWidth)
+        const width = Math.floor(grid.parentElement.clientWidth)
+        const amount = Math.floor(width / this.controllers.gifWidth) || 1
+        const gifWidth = Math.floor(width / amount)
         const fetchGifs  = async () => await getManyGifsById(this.parsedGifs)
-        await renderGrid(
+        renderGrid(
           {
-            gifWidth: this.controllers.gifWidth,
-            width: width,
+            gifWidth,
+            width,
             columns: amount,
             noLink: true,
             fetchGifs,
             onGifClick: (data) => {
               this.$emit('click', data.id)
             },
-            className: 'clickable'
+            className: 'clickable',
+            key: this.controllers.renders
           },
           grid
         )
+        this.controllers.renders++
       }
     }
   },
   watch: {
-    parseGif: {
+    parsedGifs: {
       handler: function () {
         this.render()
       },
@@ -66,7 +62,7 @@ export default {
   },
   computed: {
     parsedGifs: function () {
-      return this.gifs.filter(el => this.removed.indexOf(el) === -1).map(el => el.id)
+      return this.gifs.map(el => el.id)
     }
   },
   created () {
@@ -89,10 +85,8 @@ export default {
     padding: 7px 0 7px 7px;
     border-radius: 10px;
   }
-
   .grid {
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-y: auto;
   }
-
 </style>
