@@ -1,0 +1,159 @@
+/* Animations helper classes */
+
+@animation-time: 1s;
+
+.slide-right-enter-active {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  animation: slideRight @animation-time;
+}
+
+.slide-right-leave-active {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  animation: slideLeft @animation-time;
+}
+
+.slide-left-enter-active {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  animation: slideLeft @animation-time reverse;
+}
+
+.slide-left-leave-active {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  animation: slideRight @animation-time reverse;
+}
+
+.slide-up-enter-active {
+  animation: scaleY @animation-time, fade @animation-time, slideUp @animation-time;
+  transform-origin: bottom;
+}
+
+.slide-up-leave-active {
+  animation: fade @animation-time reverse, slideUp @animation-time reverse;
+  transform-origin: bottom;
+}
+
+.drop-enter-active {
+  animation: scaleY @animation-time, rotateMenu @animation-time;
+  transform-origin: top center
+}
+
+.drop-leave-active {
+  transform-origin: top;
+  animation: scaleY @animation-time reverse, rotateMenu @animation-time reverse;
+  transform-origin: top center
+}
+
+.scale-fade-enter-active {
+  animation: fade @animation-time, scale @animation-time;
+}
+
+.scale-fade-leave-active {
+  animation: fade @animation-time reverse, scale @animation-time reverse;
+}
+
+.scaleX-fade-enter-active {
+  animation: fade @animation-time, scaleX @animation-time;
+}
+
+.scaleX-fade-leave-active {
+  animation: fade @animation-time reverse, scaleX @animation-time reverse;
+}
+
+/* Animations Keyframes */
+
+@keyframes move-twink-back {
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100vw);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotateMenu {
+  0% {
+    transform: rotateX(-90deg)
+  }
+  70% {
+    transform: rotateX(20deg)
+  }
+  100% {
+    transform: rotateX(0deg)
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleY {
+  0% {
+    transform: scaleY(0);
+  }
+  70% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes scaleX {
+  0% {
+    transform: scaleX(0);
+  }
+  70% {
+    transform: scaleX(1.1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

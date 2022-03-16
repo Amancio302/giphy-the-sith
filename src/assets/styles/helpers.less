@@ -1,0 +1,741 @@
+@spacing: 4px;
+@shadow-color: #08080850;
+
+// margin helper classes
+
+.margin-top(@margin) {
+  margin-top: calc(@spacing * @margin);
+}
+.margin-bottom(@margin) {
+  margin-bottom: calc(@spacing * @margin);
+}
+.margin-left(@margin) {
+  margin-left: calc(@spacing * @margin);
+}
+.margin-right(@margin) {
+  margin-right: calc(@spacing * @margin);
+}
+
+.mt-1 {
+  .margin-top(1);
+}
+.mt-2 {
+  .margin-top(2);
+}
+.mt-3 {
+  .margin-top(3);
+}
+.mt-4 {
+  .margin-top(4);
+}
+.mt-5 {
+  .margin-top(5);
+}
+.mt-6 {
+  .margin-top(6);
+}
+.mt-7 {
+  .margin-top(7);
+}
+.mt-8 {
+  .margin-top(8);
+}
+
+.mb-1 {
+  .margin-bottom(1);
+}
+.mb-2 {
+  .margin-bottom(2);
+}
+.mb-3 {
+  .margin-bottom(3);
+}
+.mb-4 {
+  .margin-bottom(4);
+}
+.mb-5 {
+  .margin-bottom(5);
+}
+.mb-6 {
+  .margin-bottom(6);
+}
+.mb-7 {
+  .margin-bottom(7);
+}
+.mb-8 {
+  .margin-bottom(8);
+}
+
+.ms-1 {
+  .margin-left(1);
+}
+.ms-2 {
+  .margin-left(2);
+}
+.ms-3 {
+  .margin-left(3);
+}
+.ms-4 {
+  .margin-left(4);
+}
+.ms-5 {
+  .margin-left(5);
+}
+.ms-6 {
+  .margin-left(6);
+}
+.ms-7 {
+  .margin-left(7);
+}
+.ms-8 {
+  .margin-left(8);
+}
+
+.me-1 {
+  .margin-right(1);
+}
+.me-2 {
+  .margin-right(2);
+}
+.me-3 {
+  .margin-right(3);
+}
+.me-4 {
+  .margin-right(4);
+}
+.me-5 {
+  .margin-right(5);
+}
+.me-6 {
+  .margin-right(6);
+}
+.me-7 {
+  .margin-right(7);
+}
+.me-8 {
+  .margin-right(8);
+}
+
+.mx-1 {
+  .ms-1();
+  .me-1();
+}
+.mx-2 {
+  .ms-2();
+  .me-2();
+}
+.mx-3 {
+  .ms-3();
+  .me-3();
+}
+.mx-4 {
+  .ms-4();
+  .me-4();
+}
+.mx-5 {
+  .ms-5();
+  .me-5();
+}
+.mx-6 {
+  .ms-6();
+  .me-6();
+}
+.mx-7 {
+  .ms-7();
+  .me-7();
+}
+.mx-8 {
+  .ms-8();
+  .me-8();
+}
+
+.my-1 {
+  .mt-1();
+  .mb-1();
+}
+.my-2 {
+  .mt-2();
+  .mb-2();
+}
+.my-3 {
+  .mt-3();
+  .mb-3();
+}
+.my-4 {
+  .mt-4();
+  .mb-4();
+}
+.my-5 {
+  .mt-5();
+  .mb-5();
+}
+.my-6 {
+  .mt-6();
+  .mb-6();
+}
+.my-7 {
+  .mt-7();
+  .mb-7();
+}
+.my-8 {
+  .mt-8();
+  .mb-8();
+}
+
+.ma-1 {
+  .mx-1();
+  .my-1();
+}
+.ma-2 {
+  .mx-2();
+  .my-2();
+}
+.ma-3 {
+  .mx-3();
+  .my-3();
+}
+.ma-4 {
+  .mx-4();
+  .my-4();
+}
+.ma-5 {
+  .mx-5();
+  .my-5();
+}
+.ma-6 {
+  .mx-6();
+  .my-6();
+}
+.ma-7 {
+  .mx-7();
+  .my-7();
+}
+.ma-8 {
+  .mx-8();
+  .my-8();
+}
+
+// padding helper classes
+
+.padding-top(@padding) {
+  padding-top: calc(@spacing * @padding);
+}
+.padding-bottom(@padding) {
+  padding-bottom: calc(@spacing * @padding);
+}
+.padding-left(@padding) {
+  padding-left: calc(@spacing * @padding);
+}
+.padding-right(@padding) {
+  padding-right: calc(@spacing * @padding);
+}
+
+.pt-1 {
+  .padding-top(1);
+}
+.pt-2 {
+  .padding-top(2);
+}
+.pt-3 {
+  .padding-top(3);
+}
+.pt-4 {
+  .padding-top(4);
+}
+.pt-5 {
+  .padding-top(5);
+}
+.pt-6 {
+  .padding-top(6);
+}
+.pt-7 {
+  .padding-top(7);
+}
+.pt-8 {
+  .padding-top(8);
+}
+
+.pb-1 {
+  .padding-bottom(1);
+}
+.pb-2 {
+  .padding-bottom(2);
+}
+.pb-3 {
+  .padding-bottom(3);
+}
+.pb-4 {
+  .padding-bottom(4);
+}
+.pb-5 {
+  .padding-bottom(5);
+}
+.pb-6 {
+  .padding-bottom(6);
+}
+.pb-7 {
+  .padding-bottom(7);
+}
+.pb-8 {
+  .padding-bottom(8);
+}
+
+.ps-1 {
+  .padding-left(1);
+}
+.ps-2 {
+  .padding-left(2);
+}
+.ps-3 {
+  .padding-left(3);
+}
+.ps-4 {
+  .padding-left(4);
+}
+.ps-5 {
+  .padding-left(5);
+}
+.ps-6 {
+  .padding-left(6);
+}
+.ps-7 {
+  .padding-left(7);
+}
+.ps-8 {
+  .padding-left(8);
+}
+
+.pe-1 {
+  .padding-right(1);
+}
+.pe-2 {
+  .padding-right(2);
+}
+.pe-3 {
+  .padding-right(3);
+}
+.pe-4 {
+  .padding-right(4);
+}
+.pe-5 {
+  .padding-right(5);
+}
+.pe-6 {
+  .padding-right(6);
+}
+.pe-7 {
+  .padding-right(7);
+}
+.pe-8 {
+  .padding-right(8);
+}
+
+.px-1 {
+  .ps-1();
+  .pe-1();
+}
+.px-2 {
+  .ps-2();
+  .pe-2();
+}
+.px-3 {
+  .ps-3();
+  .pe-3();
+}
+.px-4 {
+  .ps-4();
+  .pe-4();
+}
+.px-5 {
+  .ps-5();
+  .pe-5();
+}
+.px-6 {
+  .ps-6();
+  .pe-6();
+}
+.px-7 {
+  .ps-7();
+  .pe-7();
+}
+.px-8 {
+  .ps-8();
+  .pe-8();
+}
+
+.py-1 {
+  .pt-1();
+  .pb-1();
+}
+.py-2 {
+  .pt-2();
+  .pb-2();
+}
+.py-3 {
+  .pt-3();
+  .pb-3();
+}
+.py-4 {
+  .pt-4();
+  .pb-4();
+}
+.py-5 {
+  .pt-5();
+  .pb-5();
+}
+.py-6 {
+  .pt-6();
+  .pb-6();
+}
+.py-7 {
+  .pt-7();
+  .pb-7();
+}
+.py-8 {
+  .pt-8();
+  .pb-8();
+}
+
+.pa-1 {
+  .px-1();
+  .py-1();
+}
+.pa-2 {
+  .px-2();
+  .py-2();
+}
+.pa-3 {
+  .px-3();
+  .py-3();
+}
+.pa-4 {
+  .px-4();
+  .py-4();
+}
+.pa-5 {
+  .px-5();
+  .py-5();
+}
+.pa-6 {
+  .px-6();
+  .py-6();
+}
+.pa-7 {
+  .px-7();
+  .py-7();
+}
+.pa-8 {
+  .px-8();
+  .py-8();
+}
+
+// rounded helper classes
+
+.border-radius-top-left(@border-radius) {
+  border-top-left-radius: calc(@spacing * @border-radius)
+}
+.border-radius-top-right(@border-radius) {
+  border-top-right-radius: calc(@spacing * @border-radius)
+}
+.border-radius-bottom-left(@border-radius) {
+  border-bottom-left-radius: calc(@spacing * @border-radius)
+}
+.border-radius-bottom-right(@border-radius) {
+  border-bottom-right-radius: calc(@spacing * @border-radius)
+}
+
+.bts-1 {
+  .border-radius-top-left(1);
+}
+.bts-2 {
+  .border-radius-top-left(2);
+}
+.bts-3 {
+  .border-radius-top-left(3);
+}
+.bts-4 {
+  .border-radius-top-left(4);
+}
+.bts-5 {
+  .border-radius-top-left(5);
+}
+.bts-6 {
+  .border-radius-top-left(6);
+}
+.bts-7 {
+  .border-radius-top-left(7);
+}
+.bts-8 {
+  .border-radius-top-left(8);
+}
+
+.bte-1 {
+  .border-radius-top-right(1);
+}
+.bte-2 {
+  .border-radius-top-right(2);
+}
+.bte-3 {
+  .border-radius-top-right(3);
+}
+.bte-4 {
+  .border-radius-top-right(4);
+}
+.bte-5 {
+  .border-radius-top-right(5);
+}
+.bte-6 {
+  .border-radius-top-right(6);
+}
+.bte-7 {
+  .border-radius-top-right(7);
+}
+.bte-8 {
+  .border-radius-top-right(8);
+}
+
+.bbs-1 {
+  .border-radius-bottom-left(1);
+}
+.bbs-2 {
+  .border-radius-bottom-left(2);
+}
+.bbs-3 {
+  .border-radius-bottom-left(3);
+}
+.bbs-4 {
+  .border-radius-bottom-left(4);
+}
+.bbs-5 {
+  .border-radius-bottom-left(5);
+}
+.bbs-6 {
+  .border-radius-bottom-left(6);
+}
+.bbs-7 {
+  .border-radius-bottom-left(7);
+}
+.bbs-8 {
+  .border-radius-bottom-left(8);
+}
+
+.bbe-1 {
+  .border-radius-bottom-right(1);
+}
+.bbe-2 {
+  .border-radius-bottom-right(2);
+}
+.bbe-3 {
+  .border-radius-bottom-right(3);
+}
+.bbe-4 {
+  .border-radius-bottom-right(4);
+}
+.bbe-5 {
+  .border-radius-bottom-right(5);
+}
+.bbe-6 {
+  .border-radius-bottom-right(6);
+}
+.bbe-7 {
+  .border-radius-bottom-right(7);
+}
+.bbe-8 {
+  .border-radius-bottom-right(8);
+}
+
+.bta-1 {
+  .bts-1();
+  .bte-1();
+}
+.bta-2 {
+  .bts-2();
+  .bte-2();
+}
+.bta-3 {
+  .bts-3();
+  .bte-3();
+}
+.bta-4 {
+  .bts-4();
+  .bte-4();
+}
+.bta-5 {
+  .bts-5();
+  .bte-5();
+}
+.bta-6 {
+  .bts-6();
+  .bte-6();
+}
+.bta-7 {
+  .bts-7();
+  .bte-7();
+}
+.bta-8 {
+  .bts-8();
+  .bte-8();
+}
+
+.bba-1 {
+  .bbs-1();
+  .bbe-1();
+}
+.bba-2 {
+  .bbs-2();
+  .bbe-2();
+}
+.bba-3 {
+  .bbs-3();
+  .bbe-3();
+}
+.bba-4 {
+  .bbs-4();
+  .bbe-4();
+}
+.bba-5 {
+  .bbs-5();
+  .bbe-5();
+}
+.bba-6 {
+  .bbs-6();
+  .bbe-6();
+}
+.bba-7 {
+  .bbs-7();
+  .bbe-7();
+}
+.bba-8 {
+  .bbs-8();
+  .bbe-8();
+}
+
+.bas-1 {
+  .bts-1();
+  .bbs-1();
+}
+.bas-2 {
+  .bts-2();
+  .bbs-2();
+}
+.bas-3 {
+  .bts-3();
+  .bbs-3();
+}
+.bas-4 {
+  .bts-4();
+  .bbs-4();
+}
+.bas-5 {
+  .bts-5();
+  .bbs-5();
+}
+.bas-6 {
+  .bts-6();
+  .bbs-6();
+}
+.bas-7 {
+  .bts-7();
+  .bbs-7();
+}
+.bas-8 {
+  .bts-8();
+  .bbs-8();
+}
+
+.bae-1 {
+  .bte-1();
+  .bbe-1();
+}
+.bae-2 {
+  .bte-2();
+  .bbe-2();
+}
+.bae-3 {
+  .bte-3();
+  .bbe-3();
+}
+.bae-4 {
+  .bte-4();
+  .bbe-4();
+}
+.bae-5 {
+  .bte-5();
+  .bbe-5();
+}
+.bae-6 {
+  .bte-6();
+  .bbe-6();
+}
+.bae-7 {
+  .bte-7();
+  .bbe-7();
+}
+.bae-8 {
+  .bte-8();
+  .bbe-8();
+}
+
+.baa-1 {
+  .bta-1();
+  .bba-1();
+}
+.baa-2 {
+  .bta-2();
+  .bba-2();
+}
+.baa-3 {
+  .bta-3();
+  .bba-3();
+}
+.baa-4 {
+  .bta-4();
+  .bba-4();
+}
+.baa-5 {
+  .bta-5();
+  .bba-5();
+}
+.baa-6 {
+  .bta-6();
+  .bba-6();
+}
+.baa-7 {
+  .bta-7();
+  .bba-7();
+}
+.baa-8 {
+  .bta-8();
+  .bba-8();
+}
+
+.raised (@raise) {
+  box-shadow: calc(@raise * -1px) calc(@raise * 1px) @shadow-color;
+}
+
+// raised helper classes
+
+.raised-1 {
+  .raised(1);
+}
+.raised-2 {
+  .raised(2);
+}
+.raised-3 {
+  .raised(3);
+}
+.raised-4 {
+  .raised(4);
+}
+.raised-5 {
+  .raised(5);
+}
+.raised-6 {
+  .raised(6);
+}
+.raised-7 {
+  .raised(7);
+}
+.raised-8 {
+  .raised(8);
+}

@@ -1,0 +1,169 @@
+/* Fonts */
+
+.star-text {
+  color: #FFE81F;
+  font-family: StarJedi;
+}
+
+@font-face {
+  font-family: StarJedi;
+  src: url('/src/assets/fonts/starjedi/Starjedi.ttf');
+}
+
+@media all and (max-width: 600px){
+  .alert-container {
+    bottom: 0;
+    left: 0;
+  }
+}
+
+@media all and (max-width: 960px){
+  .alert-container {
+    bottom: 0;
+    left: 0;
+  }
+}
+
+@media all and (max-width: 1300px){
+  .alert-container {
+    top: 0;
+    right: 0;
+  }
+}
+
+@media all and (min-width: 1900px){
+  .alert-container {
+    top: 0;
+    right: 0;
+  }
+}
+
+// card definition
+
+.card {
+  background-color: #fafafa;
+}
+
+// colors
+
+@alert-background: #ffffff10;
+@success: #22BB33;
+@warning: #F0AD4E;
+@error: #BB2133;
+
+@inverted-color: #FFFFFF;
+
+.success {
+  border: 3px solid @success;
+  background-color: @alert-background;
+}
+.warning {
+  border: 3px solid @warning;
+  background-color: @alert-background;
+}
+.error {
+  border: 3px solid @error;
+  background-color: @alert-background;
+}
+
+.success-text {
+  color: @success;
+}
+.warning-text {
+  color: @warning;
+}
+.error-text {
+  color: @error;
+}
+
+/* Config */
+
+i.icon {
+  display: inline;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+/* Layout */
+
+.fill-height {
+  height: 100%;
+}
+
+.overlay {
+  z-index: 99;
+  position: absolute;
+}
+
+.hoverable:hover {
+  background: #ffffff25;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+/* Justify helper classes */
+
+.justify-space-between {
+  justify-content: space-between;
+}
+.justify-space-around {
+  justify-content: space-around;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+
+/* Align helper classes */
+
+.align-center {
+  align-items: center;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.align-bottom {
+  align-items: flex-end;
+}
+
+/* Text helper classes */
+
+.text-right {
+  text-align: end;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Position helper classes */
+
+.absolute {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+/* Mouse helper classes */
+
+.clickable {
+  cursor: pointer;
+}
