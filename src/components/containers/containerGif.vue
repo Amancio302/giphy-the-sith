@@ -20,10 +20,16 @@ export default {
       type: [String, Number]
     },
     width: {
-      type: String
+      type: [String, Number]
     },
     id: {
       type: String
+    },
+    'link': {
+      type: Boolean
+    },
+    'show-attribution': {
+      type: Boolean
     }
   },
   data: () => ({
@@ -35,20 +41,35 @@ export default {
   watch: {
     id: function () {
       this.render()
+    },
+    width: function () {
+      this.render()
+    },
+    height: function () {
+      this.render()
+    },
+    link: function () {
+      this.render()
+    },
+    showAttribution: function () {
+      this.render()
     }
   },
   methods: {
     async render () {
       if (this.id) {
         const gifElement = this.$refs.gif
-        const height = isNaN(this.height) ? parseInt(this.height.match(/(\d+)/)) : this.height
+        const height = this.height ? isNaN(this.height) ? parseInt(this.height.match(/(\d+)/)) : this.height : undefined
+        const width = this.width ? isNaN(this.width) ? parseInt(this.width.match(/(\d+)/)) : this.width : undefined
         if (gifElement) {
           const { data } = await getOneGifById(this.id)
           renderGif(
             {
-              height: height,
+              height,
+              width,
               gif: data,
-              noLink: true
+              noLink: !this.link,
+              hideAttribution: !this.showAttribution
             },
             gifElement
           )
