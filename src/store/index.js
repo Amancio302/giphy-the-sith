@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     gifs: [],
     lastGif: undefined,
-    messages: []
+    lastMessage: undefined,
+    numMessages: 0
   },
   getters: {
     gifs (state) {
@@ -22,8 +23,8 @@ export default new Vuex.Store({
       const gifs = Array.from(JSON.parse(localStorage.getItem('gifs')) || [])
       return gifs.filter(el => el.id === state.lastGif)[0] || undefined
     },
-    messages (state) {
-      return state.messages
+    lastMessage (state) {
+      return state.lastMessage
     }
   },
   mutations: {
@@ -34,11 +35,7 @@ export default new Vuex.Store({
       }
     },
     sendMessage (state, payload) {
-      console.log(payload)
-      state.messages.push({ ...payload, id: state.messages.length })
-    },
-    removeMessage (state) {
-      state.messages.splice(0, 1)
+      state.lastMessage = { ...payload, id: state.numMessages++ }
     }
   },
   actions: {
@@ -115,7 +112,6 @@ export default new Vuex.Store({
       if (res.status !== 200 && res.status !== 204) {
         return res.data.error
       }
-      console.log(Array.from(state.gifs))
       state.gifs.forEach(el => {
         if (!el.sent) {
           el.sent = true
