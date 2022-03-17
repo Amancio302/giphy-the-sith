@@ -13,11 +13,12 @@
         height: `${controllers.gifHeight}px`
       }">
         <div class="column" style="flex: 0">
-          <transition name="scale-fade" @after-leave="onAfterLeave">
+          <transition name="scaleX-fade" @after-leave="onAfterLeave">
             <ContainerGif
               :id="keepData.id"
               :height="controllers.gifHeight"
               v-show="showGif"
+              :show-attribution="test"
             />
           </transition>
         </div>
@@ -28,7 +29,7 @@
 
 <script>
 
-import InputGif from '@/components/inputs/inputGif.vue'
+import InputGif from '@/components/inputs/InputGif.vue'
 
 import ContainerGif from '@/components/containers/containerGif.vue'
 
@@ -51,7 +52,8 @@ export default {
       isLoading: false,
       gifHeight: 200
     },
-    keepData: {}
+    keepData: {},
+    test: false
   }),
   methods: {
     onInput (val) {
