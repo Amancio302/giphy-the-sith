@@ -5,7 +5,7 @@ import './plugins/semantic'
 import router from './router'
 import store from './store'
 
-import '@/assets/styles/main.css'
+import '@/assets/styles/index.less'
 
 Vue.config.productionTip = false
 
