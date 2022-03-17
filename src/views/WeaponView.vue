@@ -66,9 +66,8 @@ export default {
   methods: {
     async onSuccessClick () {
       const res = await this.$store.dispatch('addGif', this.gif)
-      console.log(res)
       if (res !== true) {
-        this.$store.commit('sendMessage', { text: 'esse gif já está no arsenal patrulheiro!', duration: 2500 })
+        this.$store.commit('sendMessage', { text: 'esse gif já está no arsenal patrulheiro!', duration: 2500, type: 'error' })
       }
     },
     onErrorClick () {

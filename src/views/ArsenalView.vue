@@ -78,11 +78,11 @@ export default {
   methods: {
     async onErrorClick () {
       await this.$store.dispatch('clearGifs')
-      this.$store.commit('sendMessage', { text: 'arsenal completamente limpo patrulheiro!', duration: 2500 })
+      this.$store.commit('sendMessage', { text: 'arsenal completamente limpo patrulheiro!', duration: 2500, type: 'warning' })
     },
     async onSuccessClick () {
       await this.$store.dispatch('sendGifs')
-      this.$store.commit('sendMessage', { text: 'ataque enviado com sucesso patrulheiro!', duration: 3000 })
+      this.$store.commit('sendMessage', { text: 'ataque enviado com sucesso patrulheiro!', duration: 3000, type: 'success' })
     },
     onGifClick (id) {
       this.controllers.clickedId = id
