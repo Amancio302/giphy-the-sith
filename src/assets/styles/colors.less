@@ -1,0 +1,54 @@
+@success: #22BB33;
+@warning: #FBBD08;
+@error: #BB2133;
+@shadow-color: #08080850;
+@overlayable-background: #ffffff10;
+@dark-color: #0f0f0f;
+@dark-border: #0f0f0f;
+@light-color: #fafafa;
+@light-border: #fafafa;
+
+@font-primary: #FFE81F;
+
+.success {
+  border: 3px solid @success;
+  background-color: @overlayable-background;
+}
+.warning {
+  border: 3px solid @warning;
+  background-color: @overlayable-background;
+}
+.error {
+  border: 3px solid @error;
+  background-color: @overlayable-background;
+}
+
+.primary-text {
+  color: @font-primary;
+}
+
+.success-text {
+  color: @success;
+}
+.warning-text {
+  color: @warning;
+}
+.error-text {
+  color: @error;
+}
+
+i.yellow.icon {
+  .warning-text;
+}
+
+.ui.yellow.button {
+  background-color: @warning;
+}
+
+.ui.red.button {
+  background-color: @error;
+}
+
+.ui.green.button {
+  background-color: @success;
+}
