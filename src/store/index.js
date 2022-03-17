@@ -20,8 +20,7 @@ export default new Vuex.Store({
       return res || []
     },
     lastGif (state) {
-      const gifs = Array.from(JSON.parse(localStorage.getItem('gifs')) || [])
-      return gifs.filter(el => el.id === state.lastGif)[0] || undefined
+      return state.gifs.filter(el => el.id === state.lastGif)[0] || undefined
     },
     lastMessage (state) {
       return state.lastMessage
@@ -90,6 +89,7 @@ export default new Vuex.Store({
         if (res.status !== 200 && res.status !== 204) {
           return res.data.error
         }
+        if (state.lastGif === id) state.lastGif = undefined
         state.gifs.splice(index, 1)
         localStorage.setItem('gifs', JSON.stringify(state.gifs))
         return true
