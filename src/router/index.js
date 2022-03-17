@@ -9,20 +9,20 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'weapon',
-    component: WeaponView,
-    meta: {
-      left: 'goal',
-      right: 'arsenal'
-    }
-  },
-  {
-    path: '/goal',
     name: 'goal',
     component: GoalsView,
     meta: {
       left: 'arsenal',
       right: 'weapon'
+    }
+  },
+  {
+    path: '/weapon',
+    name: 'weapon',
+    component: WeaponView,
+    meta: {
+      left: 'goal',
+      right: 'arsenal'
     }
   },
   {
