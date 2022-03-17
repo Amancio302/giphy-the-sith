@@ -1,5 +1,5 @@
 <template>
-  <div id="toast" class="overlay my-toast">
+  <div id="toast" class="toast">
     <transition name="fade">
       <div class="star-text justify-center" v-show="showToast">
         <transition-group name="slide-up" @leave="onLeave">
@@ -8,8 +8,8 @@
             :key="gif.id"
           >
             <ContainerGif
-              v-bind="parse(gif)"
-              :height="75"
+              v-bind="parsedQueue[gif.id]"
+              :width="100"
               class="toast-gif"
             />
           </div>
@@ -35,10 +35,6 @@ export default {
   methods: {
     onLeave () {
       this.queue.splice(0, 1)
-    },
-    parse (gif) {
-      const index = this.queue.map(el => el.id).indexOf(gif.id)
-      return this.queue[index]
     }
   },
   watch: {
@@ -58,8 +54,21 @@ export default {
     reversedQueue: function () {
       return Array.from(this.queue.filter(el => el.active)).reverse()
     },
+    parsedQueue: function () {
+      const res = {}
+      this.queue.map(el => {
+        res[el.id] = el
+      })
+      return res
+    },
     showToast: function () {
       return this.queue.length > 0
+    }
+  },
+  beforeDestroy () {
+    let id = window.setTimeout(function() {}, 0)
+    while (id--) {
+      window.clearTimeout(id)
     }
   }
 }
@@ -74,6 +83,13 @@ export default {
     z-index: 99;
   }
   .toast-gif {
-    margin-top: 8px;
+    /* margin-top: 8px; */
+  }
+  .toast {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    overflow: hidden;
   }
 </style>

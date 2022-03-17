@@ -1,10 +1,18 @@
 <template>
-  <div id="alert">
-    <transition name="scale-fade">
-      <div v-if="showOverlay" class="overlay star-text alert">
-        {{ message.text }}
+  <div id="alert" class="alert-container star-text">
+    <transition-group name="scale-fade" @leave="onLeave">
+      <div
+        v-for="message in messages"
+        :key="message.id"
+        class="card text-right alert-card py-2 px-3 baa-3 mt-3 me-3"
+        :class="parsedQueue[message.id].classes"
+        ref="alert"
+      >
+        <div class="alert-message">
+          {{ parsedQueue[message.id].text }}
+        </div>
       </div>
-    </transition>
+    </transition-group>
   </div>
 </template>
 
@@ -12,47 +20,45 @@
 export default {
   name: 'GTS-alert-component',
   data: () => ({
-    controllers: {
-      isCounting: false,
-      text: '',
-      duration: 0
-    }
+    queue: []
   }),
   methods: {
-    count () {
-      console.log('isCounting')
-      this.controllers.isCounting = true
-      setTimeout(() => {
-        console.log('stopCounting')
-        this.controllers.isCounting = false
-        setTimeout(() => {
-          this.$store.commit('removeMessage')
-          }, 1000)
-      }, this.message.duration)
+    onLeave () {
+      this.queue.splice(0, 1)
+    },
+    parseClass (type) {
+      const classes = {}
+      classes[type] = true
+      classes[`${type}-text`] = true
+      return classes
     }
   },
   watch: {
-    message: {
-      handler (val, oldval) {
-        console.log('message changed', oldval, val)
+    lastMessage: {
+      handler (val) {
         if (val) {
-          if (!oldval || (oldval && oldval.id !== val.id)) this.count()
+          this.queue.push({ ...val, active: true })
+          setTimeout(() => {
+            this.queue[0].active = false
+          }, val.duration)
         }
       }
-    },
-    showOverlay: function (val) {
-      console.log('show', val)
     }
   },
   computed: {
+    lastMessage: function () {
+      return this.$store.getters.lastMessage
+    },
     messages: function () {
-      return this.$store.getters.messages
+      return this.queue.filter(el => el.active)
     },
-    message: function () {
-      return this.messages[0]
-    },
-    showOverlay: function () {
-      return this.controllers.isCounting && !!this.message
+    parsedQueue: function () {
+      const res = {}
+      this.queue.map(el => {
+        el.classes = this.parseClass(el.type)
+        res[el.id] = el
+      })
+      return res
     }
   },
   beforeDestroy () {
@@ -65,9 +71,6 @@ export default {
 }
 </script>
 
-<style scoped>
-  .alert {
-    margin-top: -16px;
-    margin-left: 16px;
-    }
+<style lang="less" scoped>
+  
 </style>
