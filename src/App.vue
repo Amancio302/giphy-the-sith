@@ -35,8 +35,8 @@
         </div>
       </router-link>
     </div>
-    <Toast/>
-    <Alert/>
+    <Toast class="pb-3 pe-3" />
+    <Alert class="pt-3 pe-3" />
   </div>
 </template>
 
@@ -78,11 +78,16 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+
+  @import url('/src/assets/styles/colors.less');
+
+  @star-height: 100vh;
+  @star-width: 100vw;
+  @twinkling-height: 80%;
 
   #app {
     height: 100vh;
-    background: blue;
   }
   .logo {
     font-size: 2em;
@@ -92,33 +97,29 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
-    max-height: 100vh;
-    width: 100vw;
-    background: linear-gradient(to bottom, #000000 80%, #0f0f0f 90%, #2E67F8 100%);
+    height: @star-height;
+    max-height: @star-height;
+    width: @star-width;
+    background: linear-gradient(to bottom, #000000 80%, @dark-color 90%, @bottom-color 100%);
   }
   .stars {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
-    width: 100vw;
+    height: @star-height;
+    width: @star-width;
     background: url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center ;
   }
   .twinkling {
     position: absolute;
     top: 0;
     left: 0;
-    height: 80%;
-    width: 100vw;
+    height: @twinkling-height;
+    width: @star-width;
     background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
     animation:move-twink-back 500s linear infinite;
   }
-  .header {
-    height: 10vh
-  }
   .main {
-    /* max-height: 100vh; */
     position: relative;
     overflow: auto;
   }
@@ -132,25 +133,14 @@ export default {
     justify-content: center;
     height: 100%;
   }
-  .config {
-    margin: 32px;
-  }
-  .icon {
-    z-index: 1;
-  }
-  .input-container-rounded {
-    border-radius: 0 0 32px 32px;
-    min-height: 77px;
-  }
   .navigator {
-    min-height: 100vh !important;
+    min-height: @star-height !important;
     text-decoration: none !important;
-    color: #ffffff !important;
+    color: @light-color !important;
     z-index: 3;
   }
-
   a:-webkit-any-link {
-    color: #ffffff !important;
+    color: @light-color !important;
     text-decoration: none !important;
   }
 </style>
