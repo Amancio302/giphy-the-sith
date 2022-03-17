@@ -58,3 +58,5 @@ npm run lint
 ```
 docker-compose up
 ```
+
+A aplicação estará disponível em: http://localhost:8080/
