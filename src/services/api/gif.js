@@ -18,12 +18,18 @@ export async function sendAllGifsToWar (data) {
 // READ
 
 // Simula a leitura de todos os gifs
+// Não utilizada
+// Seria interessante chamá-la assim que o usuário fizesse login (no caso dessa ser uma ação do sistema)
+// Ou quando uma nova sessão fosse instanciada (sessão do browser por exemplo)
+// Seria uma regra simples
 export async function getAllGifs () {
   // return api.get('/gifs').catch(err => err.response)
   return { status: 200, data: [] }
 }
 
 // Simula a leitura de um gif
+// Não utilizada
+// Seria interessante chamá-la numa tela à parte para visualizar o GIF
 export async function getOneGif (id) {
   // return api.get(`/gifs/${id}`).catch(err => err.response)
   return { status: 200, data: [] }
