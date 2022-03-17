@@ -1,6 +1,6 @@
-/* Animations helper classes */
-
 @animation-time: 1s;
+
+/* Animations helper classes */
 
 .slide-right-enter-active {
   position: absolute;
@@ -59,12 +59,32 @@
   animation: fade @animation-time reverse, scale @animation-time reverse;
 }
 
+.scale-fade-move {
+  animation: slideUp @animation-time;
+}
+
+.scaleY-fade-enter-active {
+  animation: fade @animation-time, scaleY @animation-time;
+}
+
+.scaleY-fade-leave-active {
+  animation: fade @animation-time reverse, scaleY @animation-time reverse;
+}
+
 .scaleX-fade-enter-active {
   animation: fade @animation-time, scaleX @animation-time;
 }
 
 .scaleX-fade-leave-active {
   animation: fade @animation-time reverse, scaleX @animation-time reverse;
+}
+
+.fade-enter-active {
+  animation: fade @animation-time;
+}
+
+.fade-leave-active {
+  animation: fade @animation-time reverse;
 }
 
 /* Animations Keyframes */

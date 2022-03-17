@@ -1,7 +1,9 @@
+@import url('./colors.less');
+
 /* Fonts */
 
 .star-text {
-  color: #FFE81F;
+  color: @font-primary;
   font-family: StarJedi;
 }
 
@@ -10,70 +12,33 @@
   src: url('/src/assets/fonts/starjedi/Starjedi.ttf');
 }
 
-@media all and (max-width: 600px){
-  .alert-container {
-    bottom: 0;
-    left: 0;
-  }
-}
-
-@media all and (max-width: 960px){
-  .alert-container {
-    bottom: 0;
-    left: 0;
-  }
-}
-
-@media all and (max-width: 1300px){
-  .alert-container {
-    top: 0;
-    right: 0;
-  }
-}
-
-@media all and (min-width: 1900px){
-  .alert-container {
-    top: 0;
-    right: 0;
-  }
+.alert-container {
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  right: 0;
 }
 
 // card definition
 
 .card {
-  background-color: #fafafa;
+  outline: 1px solid @dark-border;
+  background-color: @light-color;
 }
 
-// colors
-
-@alert-background: #ffffff10;
-@success: #22BB33;
-@warning: #F0AD4E;
-@error: #BB2133;
-
-@inverted-color: #FFFFFF;
-
-.success {
-  border: 3px solid @success;
-  background-color: @alert-background;
-}
-.warning {
-  border: 3px solid @warning;
-  background-color: @alert-background;
-}
-.error {
-  border: 3px solid @error;
-  background-color: @alert-background;
+.dark-card {
+  outline: 1px solid @light-border;
+  background-color: @dark-color;
 }
 
-.success-text {
-  color: @success;
-}
-.warning-text {
-  color: @warning;
-}
-.error-text {
-  color: @error;
+// modal
+
+.modal-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 /* Config */
@@ -99,10 +64,21 @@ h3 {
 .overlay {
   z-index: 99;
   position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-color: @overlayable-background;
+}
+
+.overlay-fixed {
+  position: fixed;
 }
 
 .hoverable:hover {
-  background: #ffffff25;
+  background: @overlayable-background;
 }
 
 .dropdown {
@@ -133,25 +109,25 @@ h3 {
 /* Align helper classes */
 
 .align-center {
-  align-items: center;
+  align-items: center !important;
 }
 
 .align-stretch {
-  align-items: stretch;
+  align-items: stretch !important;
 }
 
 .align-bottom {
-  align-items: flex-end;
+  align-items: flex-end !important;
 }
 
 /* Text helper classes */
 
 .text-right {
-  text-align: end;
+  text-align: end !important;
 }
 
 .text-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 /* Position helper classes */
