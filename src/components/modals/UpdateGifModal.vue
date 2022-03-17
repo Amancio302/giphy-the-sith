@@ -173,31 +173,11 @@ export default {
 
   .update-gif-modal {
     border-radius: inherit;
-    max-width: 50vw;
+    width: 50vw;
   }
-  @media all and (max-width: 400) {
+  @media only screen and (max-width: 700px) {
     .update-gif-modal {
-      max-width: 100vw;
-    }
-  }
-  @media all and (max-width: 600) {
-    .update-gif-modal {
-      max-width: 90vw;
-    }
-  }
-  @media all and (max-width: 900) {
-    .update-gif-modal {
-      max-width: 75vw;
-    }
-  }
-  @media all and (max-width: 1200) {
-    .update-gif-modal {
-      max-width: 50vw;
-    }
-  }
-  @media all and (min-width: 1900) {
-    .update-gif-modal {
-      max-width: 25vw;
+      width: 100vw;
     }
   }
   .actions-text {

@@ -4,11 +4,13 @@
     <div class="stars"/>
     <div class="twinkling"/>
     <div class="ui grid main">
-      <router-link class="two wide column stretch hoverable navigator star-text text-center" :to="left.fullPath">
-        <div class="nav-text">
-          {{ left.name }}
-        </div>
-      </router-link>
+      <div class="two wide column stretch">
+        <router-link class="hoverable navigator star-text text-center" :to="left.fullPath">
+          <div class="nav-text left">
+            {{ left.name }}
+          </div>
+        </router-link>
+      </div>
       <div class="twelve wide column">
         <div class="ui grid container">
           <div class="row logo">
@@ -29,8 +31,8 @@
           </div>
         </div>
       </div>
-      <router-link class="two wide column stretch hoverable navigator star-text text-center" :to="right.fullPath">
-        <div class="nav-text">
+      <router-link class="two wide column stretch hoverable navigator right star-text text-center" :to="right.fullPath">
+        <div class="nav-text right">
           {{ right.name }}
         </div>
       </router-link>
@@ -122,6 +124,7 @@ export default {
   .main {
     position: relative;
     overflow: auto;
+    margin: 0;
   }
   .content {
     overflow-y: auto;
@@ -142,5 +145,22 @@ export default {
   a:-webkit-any-link {
     color: @light-color !important;
     text-decoration: none !important;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .logo {
+      font-size: 1.5em;
+    }
+    // .nav-text.left {
+    //   transform: rotate(270deg);
+    // }
+    // .nav-text.right {
+    //   transform: rotate(90deg);
+    // }
+    .nav-text {
+      // word-break: break-all;
+      overflow-wrap: anywhere;
+      width: min-content;
+    }
   }
 </style>

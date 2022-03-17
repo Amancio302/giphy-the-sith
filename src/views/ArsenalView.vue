@@ -117,5 +117,15 @@ export default {
 </script>
 
 <style scoped>
-  
+  @media only screen and (max-width: 700px) {
+    .buttons {
+      display: flex;
+      flex-direction: column;
+    }
+    .ui.two.buttons>.button {
+      width: 100% !important;
+      border-radius: 4px;
+      margin: 4px;
+    }
+  }
 </style>
