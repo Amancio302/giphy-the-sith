@@ -1,5 +1,5 @@
 <template>
-  <div id="container-gif">
+  <div id="container-gif" ref="container-gif">
     <div ref="gif"/>
   </div>
 </template>

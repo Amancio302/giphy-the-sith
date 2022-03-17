@@ -44,6 +44,7 @@ export default {
               this.$emit('click', data.id)
             },
             className: 'clickable',
+            hideAttribution: true,
             key: this.controllers.renders
           },
           grid
