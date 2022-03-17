@@ -4,7 +4,7 @@
       <div
         v-for="message in messages"
         :key="message.id"
-        class="card text-right alert-card py-2 px-3 baa-3 mt-3 me-3"
+        class="card text-center alert-card py-2 px-3 baa-3 mt-3 me-3"
         :class="parsedQueue[message.id].classes"
         ref="alert"
       >
@@ -72,5 +72,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  
+  @media only screen and (max-width: 700px) {
+    .me-3 {
+      margin: 0 !important;
+    }
+  }
 </style>
