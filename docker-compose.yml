@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    command:
+      nginx -g 'daemon off;'
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
